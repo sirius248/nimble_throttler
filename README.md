@@ -1,8 +1,10 @@
 # NimbleThrottler
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nimble_throttler`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Code Climate](https://codeclimate.com/github/kimquy/nimble_throttler/badges/gpa.svg)](https://codeclimate.com/github/kimquy/nimble_throttler)
 
-TODO: Delete this and the text above, and describe your gem
+[![Build Status](https://travis-ci.org/kimquy/nimble_throttler.svg?branch=master)](https://travis-ci.org/kimquy/nimble_throttler)
+
+NimbleThrottler is very simple ruby gem which allow throttling an certain endpoints.
 
 ## Installation
 
@@ -22,13 +24,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add the following code into `application.rb` of your Rails app.
 
-## Development
+```ruby
+require "nimble_throttler"
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+module YourRailsApp
+  class Application < Rails::Application
+    config.middleware.use Rack::NimbleThrottling
+  end
+end
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+Now you're ready to throttle the endpoints by adding this file `nimble_throttling.rb` into `initializers` folder. Example:
+
+```ruby
+NimbleThrottler.configure do
+  throttle '/testing', limit: 5, period: 1.hours
+  throttle '/awesome', limit: 100, period: 2.hours
+  throttle '/home/page', limit: 100, period: 3.hours
+end
+```
 
 ## Contributing
 
