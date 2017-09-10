@@ -7,10 +7,10 @@ module Rack
     def call(env)
       req = Request.new(env)
 
-      if SimpleThrottler.endpoints.include?(req.path)
-        SimpleThrottler.throttle_for(req)
-        if SimpleThrottler.exceed_limit?(req)
-          message = "Rate limit exceeded. Try again in #{SimpleThrottler.expires_in(req)} seconds"
+      if NimbleThrottler.endpoints.include?(req.path)
+        NimbleThrottler.throttle_for(req)
+        if NimbleThrottler.exceed_limit?(req)
+          message = "Rate limit exceeded. Try again in #{NimbleThrottler.expires_in(req)} seconds"
           [429, { 'Content-Type' => 'text/html', 'Content-Length' => message.size.to_s }, [message]]
         else
           normal_response(env)

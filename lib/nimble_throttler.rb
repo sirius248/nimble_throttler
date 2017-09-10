@@ -1,6 +1,7 @@
 require 'singleton'
 require 'rack'
 require 'active_support'
+require 'rack/nimble_throttling'
 
 class NimbleThrottler
   include Singleton

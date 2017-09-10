@@ -5,13 +5,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "nimble_throttler"
-  spec.version       = "0.0.1"
+  spec.version       = "0.0.2"
   spec.authors       = ["Long Nguyen"]
   spec.email         = ["long.polyglot@gmail.com"]
 
   spec.summary       = "Simple throttler"
   spec.description   = "Simple throttler that base on the IP address"
-  spec.homepage      = "https://github.com/kimquy/scratch_rate_limitter"
+  spec.homepage      = "https://github.com/kimquy/nimble_throttler"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
